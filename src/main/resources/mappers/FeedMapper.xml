@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.green.greengram2.feed.FeedMapper">
+    <insert id="insFeed" useGeneratedKeys="true" keyProperty="ifeed">
+        insert into t_feed
+        set iuser=#{iuser},
+        contents=#{contents},
+        location=#{location}
+    </insert>
+    <insert id="insFeedPic">
+        insert into t_feed_pics
+        (ifeed, pic)
+        values
+        <foreach collection="pics" item="pic" separator=",">
+            (#{ifeed},#{pic})
+        </foreach>
+    </insert>
+    <select id="selFeedAll">
+        select A.ifeed, A.contents, A.location, B.iuser,B.pic as writerPic, B.nm As writerNm
+        ,A.created_at As createdAt,
+        if(C.ifeed>0, 1, 0)As isFav
+        from t_feed A
+        join t_user B
+        on A.iuser=B.iuser
+        left join t_feed_fav C
+        on A.ifeed=C.ifeed
+        and C.ifeed=#{loginedIuser}
+        <if test="targetIuser>0">
+            where A.iuser=#{targetIuser}
+        </if>
+        order by A.ifeed DESC
+        LIMIT #{startIdx}, #{rowCount}
+    </select>
+
+
+    <select id="selFeed">
+        select iuser
+        from t_feed
+        where ifeed=#{ifeed}
+    </select>
+
+    <delete id="delFeed">
+        delete from t_feed
+        where ifeed=#{ifeed}
+    </delete>
+    <delete id="delFav">
+        delete from t_feed_fav
+        where ifeed=#{ifeed}
+    </delete>
+    <delete id="delComment">
+        delete from t_feed_comment
+        where ifeed=#{ifeed}
+    </delete>
+    <delete id="delPic">
+        delete from t_feed_pics
+        where ifeed=#{ifeed}
+    </delete>
+
+</mapper>
