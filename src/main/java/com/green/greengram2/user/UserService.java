@@ -17,8 +17,8 @@ public class UserService {
         public UserSigninVo userSignin(UserSigninDto dto) {
 
             UserSigninProcVo savedVo = mapper.selUserForSignin(dto);
-            String savedPw = savedVo.getUpw(); //DB에서 가져온 비밀번호
-            boolean comparedPw = BCrypt.checkpw(dto.getUpw(), savedPw);
+//            String savedPw = savedVo.getUpw(); //DB에서 가져온 비밀번호
+//            boolean comparedPw = BCrypt.checkpw(dto.getUpw(), savedPw);
             UserSigninVo vo = new UserSigninVo();
             if(savedVo ==null) {
                 vo.setResult(2);
@@ -35,7 +35,7 @@ public class UserService {
         }
 
 
-    public ResVo postIns(UserSignupDto dto) {
+    public ResVo postIns(UserSignupDto dto) { //로그인
         String hashedPw = BCrypt.hashpw(dto.getUpw(), BCrypt.gensalt());
         log.info("hashedPw:{}", hashedPw);
 
