@@ -26,7 +26,6 @@ public class UserController {
     }
 
     @Operation(summary = "회원가입", description = "회원가입 처리")
-    @PostMapping("/signup")
     @Parameters(value = {
             @Parameter(name="uid", description = "아이디"),
             @Parameter(name="upw", description = "비밀번호"),
@@ -34,7 +33,7 @@ public class UserController {
             @Parameter(name="pic", description = "프로필 사진")
 
     })
-
+    @PostMapping("/signup")
     public ResVo postUserSignup(@RequestBody UserSignupDto dto){
         log.info("dto:{}", dto);
 

@@ -7,5 +7,8 @@ public class UserSigninVo {
     private int result;
     private int iuser;
     private String nm;
-    private String pic;
+    private String pic; //프로필사진
+
+    // 로그인 성공여부
+
 }

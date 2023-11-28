@@ -20,7 +20,7 @@ public class UserService {
             String savedPw = savedVo.getUpw(); //DB에서 가져온 비밀번호
             boolean comparedPw = BCrypt.checkpw(dto.getUpw(), savedPw);
             UserSigninVo vo = new UserSigninVo();
-            if(savedVo == null) {
+            if(savedVo ==null) {
                 vo.setResult(2);
                 return vo;
             } else if(!BCrypt.checkpw(dto.getUpw(), savedVo.getUpw())) {
