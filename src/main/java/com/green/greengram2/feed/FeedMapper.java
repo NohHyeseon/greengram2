@@ -16,6 +16,6 @@ public interface FeedMapper {
     int delFav(int ifeed);
     int delPic(int ifeed);
     int delComment(int ifeed);
-    // dfjksdfjjl
+
 
 }
