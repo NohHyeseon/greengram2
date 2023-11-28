@@ -17,4 +17,5 @@ public interface FeedMapper {
     int delPic(int ifeed);
     int delComment(int ifeed);
 
+
 }
