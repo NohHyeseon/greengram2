@@ -37,6 +37,9 @@ public class FeedService {
         for (FeedSelVo vo : list) {
             List<String> pics = picsMapper.selFeedPicsAll(vo.getIfeed());
             vo.setPics(pics);
+            //
+
+
             List<FeedCommentSelVo> comments = cMapper.selCommentAll(FeedCommentSelDto.builder()
                     .ifeed(vo.getIfeed())
                     .startIdx(0)
